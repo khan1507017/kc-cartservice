@@ -26,10 +26,11 @@ namespace cartservice
         public void ConfigureServices(IServiceCollection services)
         {
             string redisAddress = Configuration["REDIS_ADDR"];
+            string redisPassword = Configuration["REDIS_PASS"];
             ICartStore cartStore = null;
             if (!string.IsNullOrEmpty(redisAddress))
             {
-                cartStore = new RedisCartStore(redisAddress);
+                cartStore = new RedisCartStore(redisAddress, redisPassword);
             }
             else
             {
